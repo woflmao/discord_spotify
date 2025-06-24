@@ -58,7 +58,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(f'type of env channel {type(CHANNEL_ID)}')
+    print(f'type of env channel {type(int(CHANNEL_ID))}')
     print(f'type of channel id {type(message.channel.id)}')
     if message.channel.id == CHANNEL_ID:
       if message.author == client.user:
