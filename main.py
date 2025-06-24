@@ -69,9 +69,10 @@ async def on_message(message):
           return
       if message.content.startswith('https://open.spotify.com/track/'):
           print(f'found message! {message.content}')
-          track_name = await add_song_to_playlist(message.content, PLAYLISTID)
-          embed = discord.Embed(title=f"Adding '" + track_name + "' to my playlist.", color=0x00ff00)
-          await message.channel.send(embed=embed)
+          await add_song_to_playlist(message.content, PLAYLISTID)
+          # track_name = await add_song_to_playlist(message.content, PLAYLISTID)
+          # embed = discord.Embed(title=f"Adding '" + track_name + "' to my playlist.", color=0x00ff00)
+          # await message.channel.send(embed=embed)
 
 
 client.run(TOKEN)
