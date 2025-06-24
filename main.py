@@ -55,6 +55,7 @@ async def add_song_to_playlist(song_url, playlist_id):
 @client.event
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
+    print(f'client intents: {intents}')
 
 @client.event
 async def on_message(message):
