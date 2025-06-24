@@ -19,7 +19,7 @@ PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
 
 # Default intents are now required to pass to Client
 intents = discord.Intents.default()
-intents.message_content = True
+# intents.message_content = True
 client = discord.Client(intents=intents)
 
 
@@ -58,6 +58,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     channel = client.get_channel(CHANNEL_ID)
+    print(f'message total: {message}')
     print(f'message.channel.id: {message.channel.id}, from .env {channel}')
     print(f'message.author: {message.author}')
     print(f'client.user: {client.user}')
