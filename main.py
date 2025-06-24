@@ -29,8 +29,8 @@ async def add_song_to_playlist(song_url, playlist_id):
     auth = SpotifyOAuth(client_id=SPOTIFYID,
                          client_secret=SPOTIFYSECRET,
                          redirect_uri='http://127.0.0.1:8000/callback',
-                         scope='playlist-modify-public')
-    sp = spotipy.Spotify(auth_manager=auth)
+                         scope=['playlist-modify-public','playlist-read-collaborative'])
+    sp = spotipy.Spotify(auth_manager=auth, requests_timeout=5)
 
     # Extract the song id from the song url
     song_id = song_url.split('track/')[1]
@@ -40,6 +40,7 @@ async def add_song_to_playlist(song_url, playlist_id):
 
     # Add the song to the playlist
     # await asyncio.sleep(0)
+    print(f'playlist id: {PLAYLISTID}')
     sp.playlist_add_items(playlist_id=PLAYLISTID, items=[song_id], position=(-1))
 
     # Getting the song name for message formatting
