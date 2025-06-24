@@ -60,6 +60,7 @@ async def on_ready():
 async def on_message(message):
     if message.channel.id == CHANNEL_ID:
       if message.author == client.user:
+          print(f'message author: <{message.author}> == client.user: <{client.user}>')
           return
       if message.content.startswith('https://open.spotify.com/track/'):
           print(f'found message! {message.content}')
