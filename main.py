@@ -6,7 +6,6 @@ import discord
 from dotenv import load_dotenv
 
 import spotipy
-from spotipy.oauth2 import SpotifyOAuth
 
 from spotipy.oauth2 import SpotifyClientCredentials
 
@@ -26,12 +25,7 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 
-async def add_song_to_playlist(song_url, playlist_id):
-    # Replace <client_id> and <client_secret> with your own Spotify API credentials
-    # auth = SpotifyOAuth(client_id=SPOTIFYID,
-    #                      client_secret=SPOTIFYSECRET,
-    #                      redirect_uri='http://127.0.0.1:8000/callback',
-    #                      scope=['playlist-modify-public'])
+async def add_song_to_playlist(song_url):
     auth = SpotifyClientCredentials()
     sp = spotipy.Spotify(auth_manager=auth)
 
@@ -47,12 +41,12 @@ async def add_song_to_playlist(song_url, playlist_id):
     print(f'items: {[song_id]}')
     sp.playlist_add_items(playlist_id=PLAYLISTID, items=[song_id], position=None)
 
-    # Getting the song name for message formatting
-    track_id = song_id.split(':')[2]
-    track = sp.track(track_id)
-    track_name = track['name']
-    print(track_name)
-    return track_name
+    # Getting the song name for message formatting, uncomment for message
+    # track_id = song_id.split(':')[2]
+    # track = sp.track(track_id)
+    # track_name = track['name']
+    # print(track_name)
+    # return track_name
 
 
 
@@ -65,11 +59,14 @@ async def on_ready():
 async def on_message(message):
     if message.channel.id == int(CHANNEL_ID):
       if message.author == client.user:
-          print(f'message author: <{message.author}> == client.user: <{client.user}>')
           return
       if message.content.startswith('https://open.spotify.com/track/'):
           print(f'found message! {message.content}')
-          await add_song_to_playlist(message.content, PLAYLISTID)
+          
+          # use this for no confirmation message
+          await add_song_to_playlist(message.content)
+
+          # use this for confirmation message
           # track_name = await add_song_to_playlist(message.content, PLAYLISTID)
           # embed = discord.Embed(title=f"Adding '" + track_name + "' to my playlist.", color=0x00ff00)
           # await message.channel.send(embed=embed)
