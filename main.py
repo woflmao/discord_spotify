@@ -40,6 +40,7 @@ async def add_song_to_playlist(song_url, playlist_id):
 
     # Add the song to the playlist
     # await asyncio.sleep(0)
+    print(f'sp: {sp}')
     sp.playlist_add_items(playlist_id=PLAYLISTID, items=[song_id], position=(-1))
 
     # Getting the song name for message formatting
