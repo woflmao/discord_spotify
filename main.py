@@ -57,11 +57,13 @@ async def on_ready():
 @client.event
 async def on_message(message):
     channel = client.get_channel(CHANNEL_ID)
-    print(f'on_message: {message}')
-    if message.channel == channel:
+    print(f'message.channel.id: {message.channel.id}, from .env {channel}')
+    print(f'message.author: {message.author}')
+    print(f'client.user: {client.user}')
+    print(f'message.content: {message.content}')
+    if message.channel.id == channel:
       if message.author == client.user:
           return
-
       if message.content.startswith('https://open.spotify.com/track/'):
           track_name = await add_song_to_playlist(message.content, PLAYLISTID)
           embed = discord.Embed(title=f"Adding '" + track_name + "' to my playlist.", color=0x00ff00)
