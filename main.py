@@ -18,7 +18,7 @@ PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
 
 
 # Default intents are now required to pass to Client
-intents = discord.Intents.all()
+intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 
 
