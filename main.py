@@ -59,6 +59,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.channel.id == CHANNEL_ID:
+      print(f'message: {message}')
       if message.author == client.user:
           print(f'message author: <{message.author}> == client.user: <{client.user}>')
           return
