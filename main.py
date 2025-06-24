@@ -11,6 +11,7 @@ from spotipy.oauth2 import SpotifyOAuth
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+CHANNEL_ID = os.getenv('DISCORD_CHANNEL_ID')
 SPOTIFYID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFYSECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
@@ -55,13 +56,16 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
-        return
+    channel = client.get_channel(CHANNEL_ID)
 
-    if message.content.startswith('https://open.spotify.com/track/'):
-        track_name = await add_song_to_playlist(message.content, PLAYLISTID)
-        embed = discord.Embed(title=f"Adding '" + track_name + "' to my playlist.", color=0x00ff00)
-        await message.channel.send(embed=embed)
+    if message.channel == channel:
+      if message.author == client.user:
+          return
+
+      if message.content.startswith('https://open.spotify.com/track/'):
+          track_name = await add_song_to_playlist(message.content, PLAYLISTID)
+          embed = discord.Embed(title=f"Adding '" + track_name + "' to my playlist.", color=0x00ff00)
+          await message.channel.send(embed=embed)
 
 
 client.run(TOKEN)
