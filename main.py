@@ -68,7 +68,7 @@ async def on_message(message):
     print(f'client_user: {client.user}')
     print(f'author = user: {message.author == client.user}')
 
-    print(f'startswith: {message.content.startswith('https://open.spotify.com/track/')}')
+    print(f'startswith: {message.content.startswith("https://open.spotify.com/track/")}')
     if message.channel.id == CHANNEL_ID:
       if message.author == client.user:
           print(f'message author: <{message.author}> == client.user: <{client.user}>')
