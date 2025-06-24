@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from spotipy.oauth2 import SpotifyClientCredentials
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -29,7 +28,7 @@ async def add_song_to_playlist(song_url, playlist_id):
     # Replace <client_id> and <client_secret> with your own Spotify API credentials
     auth = SpotifyOAuth(client_id=SPOTIFYID,
                          client_secret=SPOTIFYSECRET,
-                         redirect_uri='http://127.0.0.1:8000/callback',
+                         redirect_uri='http://localhost:8888/callback',
                          scope=['playlist-modify-public','playlist-read-collaborative'])
     sp = spotipy.Spotify(auth_manager=auth)
 
