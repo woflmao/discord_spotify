@@ -28,7 +28,7 @@ async def add_song_to_playlist(song_url, playlist_id):
     # Replace <client_id> and <client_secret> with your own Spotify API credentials
     auth = SpotifyOAuth(client_id=SPOTIFYID,
                          client_secret=SPOTIFYSECRET,
-                         redirect_uri='http://127.0.0.1:8080/callback',
+                         redirect_uri='http://127.0.0.1:8049/callback',
                          scope=['playlist-modify-public'])
     sp = spotipy.Spotify(auth_manager=auth)
 
