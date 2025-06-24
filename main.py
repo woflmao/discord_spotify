@@ -57,13 +57,13 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    channel = client.get_channel(CHANNEL_ID)
+    # channel = client.get_channel(CHANNEL_ID)
     print(f'message total: {message}')
-    print(f'message.channel.id: {message.channel.id}, from .env {channel}')
+    print(f'message.channel.id: {message.channel.id}, from .env {CHANNEL_ID}')
     print(f'message.author: {message.author}')
     print(f'client.user: {client.user}')
     print(f'message.content: {message.content}')
-    if message.channel.id == channel:
+    if message.channel.id == CHANNEL_ID:
       if message.author == client.user:
           return
       if message.content.startswith('https://open.spotify.com/track/'):
