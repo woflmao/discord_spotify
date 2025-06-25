@@ -17,7 +17,7 @@ CHANNEL_ID = os.getenv('DISCORD_CHANNEL_ID')
 SPOTIFYID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFYSECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
-SPOTIFY_REFRESH_TOKEN = os.getenv('REFRESH_TOKEN')
+SPOTIFY_REFRESH_TOKEN = os.getenv('SPOTIFY_REFRESH_TOKEN')
 
 
 # Default intents are now required to pass to Client
@@ -33,8 +33,10 @@ async def authenticate_user():
     redirect_uri="http://127.0.0.1:8080/callback",
     scope=['playlist-modify-public']
   )
+
   token_info = oauth.refresh_access_token(SPOTIFY_REFRESH_TOKEN)
   access_token = token_info["access_token"]
+
   return spotipy.Spotify(auth=access_token)
   # return spotipy.Spotify(oauth_manager=auth)
 
