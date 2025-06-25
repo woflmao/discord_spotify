@@ -11,12 +11,13 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotipy.oauth2 import SpotifyClientCredentials
 
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 CHANNEL_ID = os.getenv('DISCORD_CHANNEL_ID')
 SPOTIFYID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFYSECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
+SPOTIFY_REFRESH_TOKEN = os.getenv('REFRESH_TOKEN')
 
 
 # Default intents are now required to pass to Client
@@ -26,14 +27,16 @@ intents.message_content = True
 client = discord.Client(intents=intents)
 
 async def authenticate_user():
-  auth = SpotifyOAuth(
+  oauth = SpotifyOAuth(
     client_id=SPOTIFYID,
     client_secret=SPOTIFYSECRET,
     redirect_uri="http://127.0.0.1:8080/callback",
-    scope=['playlist-modify-public'],
-    open_browser=False
+    scope=['playlist-modify-public']
   )
-  return spotipy.Spotify(oauth_manager=auth)
+  token_info = oauth.refresh_access_token(SPOTIFY_REFRESH_TOKEN)
+  access_token = token_info["access_token"]
+  return spotipy.Spotify(auth=access_token)
+  # return spotipy.Spotify(oauth_manager=auth)
 
 async def add_song_to_playlist(song_url):
     # auth = SpotifyOAuth(
@@ -45,6 +48,7 @@ async def add_song_to_playlist(song_url):
     # )
     # sp = spotipy.Spotify(oauth_manager=auth)
     sp = await authenticate_user()
+
     # Extract the song id from the song url
     song_id = song_url.split('track/')[1]
     song_id = song_id.split('?')[0]
@@ -89,4 +93,4 @@ async def on_message(message):
           # await message.channel.send(embed=embed)
 
 
-client.run(TOKEN)
+client.run(DISCORD_TOKEN)
