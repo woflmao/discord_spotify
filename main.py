@@ -26,7 +26,10 @@ client = discord.Client(intents=intents)
 
 
 async def add_song_to_playlist(song_url):
-    auth = SpotifyClientCredentials()
+    auth = SpotifyClientCredentials(
+      client_id=SPOTIFYID,
+      client_secret=SPOTIFYSECRET
+    )
     sp = spotipy.Spotify(auth_manager=auth)
 
     # Extract the song id from the song url
