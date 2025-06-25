@@ -24,6 +24,7 @@ PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
+sp = ''
 
 async def authenticate_user():
   auth = SpotifyOAuth(
