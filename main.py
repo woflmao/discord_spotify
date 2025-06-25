@@ -35,7 +35,8 @@ async def add_song_to_playlist(song_url):
       client_id=SPOTIFYID,
       client_secret=SPOTIFYSECRET,
       redirect_uri="http://127.0.0.1:8080/callback",
-      scope=['playlist-modify-public']
+      scope=['playlist-modify-public'],
+      open_browser=False
     )
     sp = spotipy.Spotify(auth_manager=auth)
 
