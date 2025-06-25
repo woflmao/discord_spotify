@@ -38,8 +38,7 @@ async def add_song_to_playlist(song_url):
     #   scope=['playlist-modify-public'],
     #   open_browser=False
     # )
-    # sp = spotipy.Spotify(auth_manager=auth)
-    sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
+    sp = spotipy.Spotify(auth_manager=auth)
 
     # Extract the song id from the song url
     song_id = song_url.split('track/')[1]
