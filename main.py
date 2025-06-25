@@ -71,7 +71,7 @@ async def add_song_to_playlist(song_url):
 @client.event
 async def on_ready():
     print(f'{client.user.name} has connected to Discord!')
-    authenticate_user()
+    await authenticate_user()
 
 @client.event
 async def on_message(message):
