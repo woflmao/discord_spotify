@@ -18,6 +18,7 @@ SPOTIFYID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFYSECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
 SPOTIFY_REFRESH_TOKEN = os.getenv('SPOTIFY_REFRESH_TOKEN')
+REDIRECT_URI = os.getenv('REDIRECT_URI')
 
 
 # Default intents are now required to pass to Client

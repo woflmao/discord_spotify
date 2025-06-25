@@ -11,11 +11,12 @@ CHANNEL_ID = os.getenv('DISCORD_CHANNEL_ID')
 SPOTIFYID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFYSECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
 PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
+REDIRECT_URI = os.getenv('REDIRECT_URI')
 
 sp_oauth = SpotifyOAuth(
     client_id=SPOTIFYID,
     client_secret=SPOTIFYSECRET,
-    redirect_uri="http://127.0.0.1:8080/callback",
+    redirect_uri=REDIRECT_URI,
     scope=["playlist-modify-private", "playlist-modify-public"],
     open_browser=True  # or False, depending on your machine
 )
