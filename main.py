@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 import spotipy
 
+from spotipy.oauth2 import SpotifyOAuth
 from spotipy.oauth2 import SpotifyClientCredentials
 
 load_dotenv()
@@ -26,9 +27,15 @@ client = discord.Client(intents=intents)
 
 
 async def add_song_to_playlist(song_url):
-    auth = SpotifyClientCredentials(
+    # auth = SpotifyClientCredentials(
+    #   client_id=SPOTIFYID,
+    #   client_secret=SPOTIFYSECRET
+    # )
+    auth = SpotifyOAuth(
       client_id=SPOTIFYID,
-      client_secret=SPOTIFYSECRET
+      client_secret=SPOTIFYSECRET,
+      redirect_uri="http://127.0.0.1:8080/callback",
+      scope=['playlist-modify-public']
     )
     sp = spotipy.Spotify(auth_manager=auth)
 
