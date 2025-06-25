@@ -24,16 +24,24 @@ PLAYLISTID = os.getenv('SPOTIFY_PLAYLIST_ID')
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
-
+auth = SpotifyOAuth(
+  client_id=SPOTIFYID,
+  client_secret=SPOTIFYSECRET,
+  redirect_uri="http://127.0.0.1:8080/callback",
+  scope=['playlist-modify-public'],
+  open_browser=False
+)
+sp = spotipy.Spotify(oauth_manager=auth)
 
 async def add_song_to_playlist(song_url):
-    auth = SpotifyOAuth(
-      client_id=SPOTIFYID,
-      client_secret=SPOTIFYSECRET,
-      redirect_uri="http://127.0.0.1:8080/callback",
-      scope=['playlist-modify-public']
-    )
-    sp = spotipy.Spotify(oauth_manager=auth)
+    # auth = SpotifyOAuth(
+    #   client_id=SPOTIFYID,
+    #   client_secret=SPOTIFYSECRET,
+    #   redirect_uri="http://127.0.0.1:8080/callback",
+    #   scope=['playlist-modify-public'],
+    #   open_browser=False
+    # )
+    # sp = spotipy.Spotify(oauth_manager=auth)
 
     # Extract the song id from the song url
     song_id = song_url.split('track/')[1]
